@@ -15,29 +15,29 @@ function SignIn() {
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Send user data to the server using the fetch API for sign-in
-    fetch("/api/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Successful sign-in, you can navigate to the user dashboard or handle it as needed
-          navigate("/dashboard");
-        } else {
-          // Handle sign-in errors
-          console.error("Sign-in failed");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
       });
+      if (response.ok) {
+        // Successful sign-up, you can navigate to the sign-in page or handle it as needed
+        console.log(response);
+        navigate("/");
+      } else {
+        // Handle sign-up errors
+        console.error("Sign-in failed");
+      }
+    } catch (error) {
+      console.log("Error", error);
+    }
   };
 
   return (
