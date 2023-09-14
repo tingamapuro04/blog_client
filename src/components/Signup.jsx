@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -16,29 +16,29 @@ function Signup() {
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Send user data to the server using the fetch API
-    fetch("/api/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Successful sign-up, you can navigate to the sign-in page or handle it as needed
-          navigate("/signin");
-        } else {
-          // Handle sign-up errors
-          console.error("Sign-up failed");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
       });
+      if (response.ok) {
+        // Successful sign-up, you can navigate to the sign-in page or handle it as needed
+        console.log("success");
+        navigate("/signin");
+      } else {
+        // Handle sign-up errors
+        console.error("Sign-up failed");
+      }
+    } catch (error) {
+      console.log("Error", error);
+    }
   };
 
   return (

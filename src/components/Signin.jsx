@@ -92,7 +92,7 @@ function SignIn() {
         </form>
         <div className="text-center">
           <p className="text-sm text-gray-600">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <span
               onClick={() => navigate("/signup")}
               className="cursor-pointer text-indigo-600 hover:text-indigo-800"
