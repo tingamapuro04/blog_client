@@ -52,13 +52,13 @@ function NavBar() {
               </a>
             </li>
             <li>
-              <a href="/about" className="text-white hover:text-gray-300">
-                About
+              <a href="/:user_id/posts" className="text-white hover:text-gray-300">
+                Posts
               </a>
             </li>
             <li>
-              <a href="/services" className="text-white hover:text-gray-300">
-                Services
+              <a href="/:user_id/posts/post" className="text-white hover:text-gray-300">
+                Post
               </a>
             </li>
             <li>
