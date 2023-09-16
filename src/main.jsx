@@ -16,8 +16,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/signin" element={<SignIn />}></Route>
       <Route path="/" element={ <Home /> }></Route>
-      <Route path="/:user_id/posts/:post_id" element={<Post />}></Route>
-      <Route path="/:user_id/posts" element={<Posts />}></Route>
+      <Route path="/posts/:post_id" element={<Post />}></Route>
+      <Route path="/posts" element={<Posts />}></Route>
     </Routes>
   </Router>
 );

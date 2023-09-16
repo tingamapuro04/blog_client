@@ -11,9 +11,12 @@ const BlogPost = ({ post }) => {
       <div className="p-4">
         <h2 className="text-xl font-semibold text-gray-800">{post.title}</h2>
         <p className="text-gray-600 mt-2">{post.desc}</p>
-        <ul className="mt-3">
+        <ul className="mt-3 flex">
           {post.category.map((category, index) => (
-            <li key={index} className="text-indigo-600">
+            <li
+              key={index}
+              className="bg-blue-400 hover:bg-blue-700 text-white px-3 py-1 mr-2 rounded-full"
+            >
               {category}
             </li>
           ))}
