@@ -9,6 +9,7 @@ import Signup from './components/Signup.jsx';
 import SignIn from './components/Signin.jsx';
 import Home from './components/Home.jsx';
 import { ContextProvider } from './context/context.jsx';
+import CreatePost from './components/CreatePost.jsx';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ContextProvider>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/" element={<Home />}></Route>
         <Route path="/posts/:post_id" element={<Post />}></Route>
         <Route path="/posts" element={<Posts />}></Route>
+        <Route path="/posts/write" element={ <CreatePost /> }></Route>
       </Routes>
     </Router>
   </ContextProvider>
