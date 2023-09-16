@@ -8,16 +8,19 @@ import Posts from './components/Posts.jsx';
 import Signup from './components/Signup.jsx';
 import SignIn from './components/Signin.jsx';
 import Home from './components/Home.jsx';
+import { ContextProvider } from './context/context.jsx';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Router>
-    <NavBar />
-    <Routes>
-      <Route path="/signup" element={<Signup />}></Route>
-      <Route path="/signin" element={<SignIn />}></Route>
-      <Route path="/" element={ <Home /> }></Route>
-      <Route path="/posts/:post_id" element={<Post />}></Route>
-      <Route path="/posts" element={<Posts />}></Route>
-    </Routes>
-  </Router>
+  <ContextProvider>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/signin" element={<SignIn />}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/posts/:post_id" element={<Post />}></Route>
+        <Route path="/posts" element={<Posts />}></Route>
+      </Routes>
+    </Router>
+  </ContextProvider>
 );

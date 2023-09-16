@@ -31,7 +31,7 @@ function Signup() {
       if (response.ok) {
         // Successful sign-up, you can navigate to the sign-in page or handle it as needed
         console.log("success");
-        navigate("/signin");
+        navigate("/");
       } else {
         // Handle sign-up errors
         console.error("Sign-up failed");

@@ -10,7 +10,6 @@ const Post = ({match}) => {
     const getPost = async () => {
       const res = await axios.get(`http://localhost:3000/api/v1/posts/${post_id}`);
       setPost(res.data.data);
-      console.log(res);
     }
     getPost();
   }, [])
