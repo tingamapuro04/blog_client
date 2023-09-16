@@ -8,6 +8,7 @@ function Home() {
     const getPosts = async () => {
       const res = await axios.get("http://localhost:3000/api/v1/posts");
       setPosts(res.data.data);
+      console.log(res.data.data);
     }
     getPosts();
   }, []);

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 
 const BlogPost = ({ post }) => {
   return (
@@ -9,7 +10,9 @@ const BlogPost = ({ post }) => {
         className="w-full h-48 object-cover"
       />
       <div className="p-4">
+        <Link to={`/posts/${post._id}`}>
         <h2 className="text-xl font-semibold text-gray-800">{post.title}</h2>
+        </Link>
         <p className="text-gray-600 mt-2">{post.desc}</p>
         <ul className="mt-3 flex">
           {post.category.map((category, index) => (
