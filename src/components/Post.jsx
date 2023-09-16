@@ -27,7 +27,8 @@ const Post = ({match}) => {
             {post.title}
           </h2>
           <p className="text-gray-600 mt-2">{post.desc}</p>
-          {/* <ul className="mt-3 flex">
+          {post.category &&
+            <ul className="mt-3 flex">
             {post.category.map((category, index) => (
               <li
                 key={index}
@@ -36,7 +37,8 @@ const Post = ({match}) => {
                 {category}
               </li>
             ))}
-          </ul> */}
+          </ul> 
+        }
         </div>
       </div>
     </div>
