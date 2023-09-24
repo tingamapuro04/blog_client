@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState  } from "react";
+import { useEffect } from "react";
 import {  useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { setPosts } from "../redux/postsSlice";
 import { fetchPosts } from "../redux/postsFetch";
 
 const BlogPost = ({ post }) => {
