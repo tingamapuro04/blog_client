@@ -1,6 +1,5 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../context/context";
 import axios from 'axios';
 
 function SignIn() {
@@ -17,23 +16,19 @@ function SignIn() {
     setUserData({ ...userData, [name]: value });
   };
 
-  const {user, dispatch, loading } = useContext(Context)
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch({type: "LOGIN_START"});
 
     // Send user data to the server using the fetch API for sign-in
     try {
       const response = await axios.post("http://localhost:3000/api/v1/login",userData);
-      dispatch({ type: "LOGIN_SUCCES", payload: response.data.data });
       navigate("/");
     } catch (error) {
-      dispatch({ type: "LOGIN_FAILED" });
       console.log("Error", error);
     }
   };
-  console.log(user);
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">

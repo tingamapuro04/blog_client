@@ -8,11 +8,10 @@ import Posts from './components/Posts.jsx';
 import Signup from './components/Signup.jsx';
 import SignIn from './components/Signin.jsx';
 import Home from './components/Home.jsx';
-import { ContextProvider } from './context/context.jsx';
 import CreatePost from './components/CreatePost.jsx';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ContextProvider>
+  <>
     <Router>
       <NavBar />
       <Routes>
@@ -24,5 +23,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/posts/write" element={ <CreatePost /> }></Route>
       </Routes>
     </Router>
-  </ContextProvider>
+  </>
 );
