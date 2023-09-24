@@ -8,25 +8,28 @@ import Post from './components/Post.jsx';
 import Posts from './components/Posts.jsx';
 import Signup from './components/Signup.jsx';
 import SignIn from './components/Signin.jsx';
+import { PersistGate } from "redux-persist/integration/react";
 import Home from './components/Home.jsx';
 import CreatePost from './components/CreatePost.jsx';
-import store from "./redux/store.js";
+import {store, persistor } from "./redux/store.js";
 import { Provider } from "react-redux";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
     <Provider store={store}>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/signin" element={<SignIn />}></Route>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/posts/:post_id" element={<Post />}></Route>
-          <Route path="/posts" element={<Posts />}></Route>
-          <Route path="/posts/write" element={<CreatePost />}></Route>
-        </Routes>
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/signin" element={<SignIn />}></Route>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/posts/:post_id" element={<Post />}></Route>
+            <Route path="/posts" element={<Posts />}></Route>
+            <Route path="/posts/write" element={<CreatePost />}></Route>
+          </Routes>
+        </Router>
+      </PersistGate>
     </Provider>
   </>
 );
