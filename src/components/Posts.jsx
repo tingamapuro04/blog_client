@@ -1,5 +1,9 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState  } from "react";
+import {  useDispatch } from "react-redux";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import { setPosts } from "../redux/postsSlice";
 
 const BlogPost = ({ post }) => {
   return (
@@ -28,7 +32,16 @@ const BlogPost = ({ post }) => {
     </div>
   );
 }
-const Posts = ({ posts }) => {
+const Posts = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getPosts = async () => {
+      const res = await axios.get("http://localhost:3000/api/v1/posts");
+      dispatch(setPosts(res.data.data));
+      console.log(res.data.data);
+    };
+    getPosts();
+  }, []);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {posts.map((post, index) => (
