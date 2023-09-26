@@ -19,12 +19,16 @@ const UpdatePost = () => {
     try {
       await axios.put(
         `http://localhost:3000/api/v1/posts/${id}`,
-        updateData
+        {
+          tittle: updateData.title,
+          desc: updateData.description,
+          category: updateData.categories.split(",").map(item => item.trim())
+        }
       );
       setUpdateData({
         title: "",
         description: "",
-        categories: "",
+        category: "",
       });
       navigate('/posts');
     } catch (error) {

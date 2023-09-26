@@ -33,7 +33,7 @@ const CreatePost = () => {
           desc: formData.desc,
           category: formData.category
             .split(",")
-            .map((cat) => cat.trim()), // Split categories by comma and trim whitespace
+            .map((cat) => cat.trim()),
         }
       );
 
