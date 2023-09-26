@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -9,15 +9,29 @@ const CreatePost = () => {
     title: "",
     desc: "",
     category: "",
+    pic: "",
   });
 
   // Function to handle form input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const handleInputChange = async(e) => {
+    const { name, value, files } = e.target;
+
+    if (files && files[0]) {
+      
+      const base64 = await convert(files[0]);
+      setFormData({
+        ...formData,
+        [formData.pic]: base64,
+      });
+
+    } else {
+      // Handle other input changes
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+    console.log(formData);
   };
 
   // Function to handle form submission
@@ -31,6 +45,7 @@ const CreatePost = () => {
         {
           title: formData.title,
           desc: formData.desc,
+          photo: formData.pic,
           category: formData.category
             .split(",")
             .map((cat) => cat.trim()),
@@ -44,6 +59,7 @@ const CreatePost = () => {
       setFormData({
         title: "",
         desc: "",
+        pic: "",
         category: "",
       });
       navigate('/')
@@ -95,6 +111,20 @@ const CreatePost = () => {
             className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-700"
           />
         </div>
+        <div className="mb-4">
+          <label htmlFor="pic" className="block text-gray-600">
+            Blog picture:
+          </label>
+          <input
+            type="file"
+            id="pic"
+            name="pic"
+            accept='.jpeg, .png, .jpg'
+            value={formData.pic}
+            onChange={handleInputChange}
+            className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+          />
+        </div>
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg focus:ring-blue-500 focus:border-blue-500"
@@ -107,3 +137,16 @@ const CreatePost = () => {
 };
 
 export default CreatePost;
+
+const convert = (file) => {
+  return new Promise((resolve, reject)=>{
+    let fileReader=new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    }
+    fileReader.onerror = (error) => {
+      reject(error);
+    }
+  })
+}
