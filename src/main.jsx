@@ -13,6 +13,7 @@ import Home from './components/Home.jsx';
 import CreatePost from './components/CreatePost.jsx';
 import {store, persistor } from "./redux/store.js";
 import { Provider } from "react-redux";
+import UpdatePost from './components/UpdatePost.jsx';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Router>
           <Header />
           <Routes>
+            <Route path="/posts/update_post/:id" element={ <UpdatePost /> } exact/>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/signin" element={<SignIn />}></Route>
             <Route path="/" element={<Home />}></Route>

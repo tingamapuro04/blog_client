@@ -1,36 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const UpdatePost = () => {
-  const { post_id } = useParams();
+  const navigate = useNavigate();
+  const { id } = useParams();
   let posts = useSelector((state) => state.posts.data.data);
-  const selected_post = posts.filter((item) => item._id === post_id)[0];
-  const [post, setPost] = useState([]);
+  const selected_post = posts.filter((item) => item._id === id)[0];
   const [updateData, setUpdateData] = useState({
     title: selected_post.title,
+    description: selected_post.desc,
     categories: selected_post.category,
   });
 
-  // useEffect(() => {
-  //   const getPost = async () => {
-  //     try {
-  //       const res = await axios.get(
-  //         `http://localhost:3000/api/v1/posts/${post_id}`
-  //       );
-  //       setPost(res.data.data);
-  //     } catch (error) {
-  //       console.error("Error fetching post:", error);
-  //     }
-  //   };
-  //   getPost();
-  // }, [post_id]);
 
   const handleUpdate = async () => {
     try {
       await axios.put(
-        `http://localhost:3000/api/v1/posts/${post_id}`,
+        `http://localhost:3000/api/v1/posts/${id}`,
         updateData
       );
       setUpdateData({
@@ -38,6 +26,7 @@ const UpdatePost = () => {
         description: "",
         categories: "",
       });
+      navigate('/posts');
     } catch (error) {
       console.error("Error updating post:", error);
     }
@@ -52,9 +41,9 @@ const UpdatePost = () => {
   };
 
   return (
-    <div className="mt-4 p-4 bg-white shadow-lg rounded-lg">
+    <div className="mt-6 p-6 shadow-lg rounded-lg min-h-screen">
       <h3 className="text-lg font-semibold mb-2">Update Post</h3>
-      <form>
+      <form className='border-3 px-3'>
         <div className="mb-4">
           <label htmlFor="updateTitle" className="block text-gray-600">
             Title:
@@ -65,7 +54,7 @@ const UpdatePost = () => {
             name="title"
             value={updateData.title}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+            className="w-full px-4 py-2 border border-cyan-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-700"
           />
         </div>
         <div className="mb-4">
@@ -76,8 +65,9 @@ const UpdatePost = () => {
             id="updateDescription"
             name="description"
             value={updateData.description}
+            rows={10}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+            className="w-full px-4 py-2 border border-cyan-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-700"
           />
         </div>
         <div className="mb-4">
@@ -90,7 +80,7 @@ const UpdatePost = () => {
             name="categories"
             value={updateData.categories}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+            className="w-full px-4 py-2 border border-cyan-400 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-700"
           />
         </div>
         <button
