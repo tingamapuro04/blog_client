@@ -21,7 +21,7 @@ const CreatePost = () => {
       const base64 = await convert(files[0]);
       setFormData({
         ...formData,
-        [formData.pic]: base64,
+        [name]: base64,
       });
 
     } else {
@@ -31,13 +31,11 @@ const CreatePost = () => {
         [name]: value,
       });
     }
-    console.log(formData);
   };
 
   // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       // Make a POST request to the API with the form data
       const response = await axios.post(
@@ -120,7 +118,6 @@ const CreatePost = () => {
             id="pic"
             name="pic"
             accept='.jpeg, .png, .jpg'
-            value={formData.pic}
             onChange={handleInputChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-700"
           />
