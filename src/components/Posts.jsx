@@ -9,7 +9,7 @@ const BlogPost = ({ post }) => {
     <Link to={`/posts/${post._id}`}>
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <img
-          src="/public/images/image.jpg"
+          src={post.photo}
           alt={post.title}
           className="w-full h-48 object-cover"
         />
@@ -41,7 +41,7 @@ const Posts = () => {
   }, [dispatch]);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {posts.map((post, index) => (
+      {posts && posts.map((post, index) => (
         <BlogPost key={index} post={post} />
       ))}
     </div>
