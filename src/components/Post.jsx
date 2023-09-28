@@ -17,7 +17,7 @@ const Post = () => {
     <div className="py-4 px-2 antialiased flex flex-col  items-stretch h-screen w-full">
       <div className="bg-white self-center flex flex-col shadow-lg w-5/6 rounded-lg p-3">
         <img
-          src="/public/images/image.jpg"
+          src={selected_post.photo}
           alt={selected_post.title}
           className="w-4/6 h-48 object-cover self-center rounded-1xl"
         />
